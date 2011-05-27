@@ -15,7 +15,7 @@ class DatabaseConfig
 	public static $type					= 'mysql';
 	public static $server				= 'localhost';
 	public static $name					= 'bublr';
-	public static $user					= 'bublr';
-	public static $password				= 'bublr';
+	public static $user					= 'gebruiker';
+	public static $password				= 'wachtwoord';
 	public static $port					= 3306;
 };
