@@ -1,0 +1,52 @@
+/****************************************************
+ * Lean mean web machine
+ *
+ * Default admin screen stylesheet
+ *
+ * @author Dirk Bonhomme <dirk@bytelogic.be>
+ * @created 2010-10-19
+ *
+ ****************************************************/
+
+/**
+ * Admin header
+ */
+#header { line-height: 70px; padding: 0 5px; } 
+#header a img:hover { opacity: .85; } 
+#header h1 { float: left; font-family: "Trebuchet MS"; font-size: 30px; text-transform: uppercase; text-shadow: #AAA 2px 2px 2px; }
+#header h1 a { text-decoration: none; color: #333; } 
+#header .logo_right { float: right; } 
+
+/**
+ * Grid styles
+ */
+.admin-actioncolumn-item { margin-right: 10px; }
+.admin-grid-collapsible-text { white-space: normal; padding: 2px 0 0 20px; height: 12px; overflow: hidden; cursor: pointer; background: url(../../images/icons/toggle-small-expand.png) left top no-repeat; }
+.admin-grid-collapsible-text.expanded { height: auto; overflow: visible; background-image: url(../../images/icons/toggle-small.png); }
+.x-grid3-cell-inner a { color: #15428B; }
+.x-grid3-cell-inner a:active,
+.x-grid3-cell-inner a:visited { color: #124089; }
+.grid-row-insert-below { border-bottom:1px solid #3366cc !important; }
+.grid-row-insert-above { border-top:1px solid #3366cc !important; } 
+
+/**
+ * Tabpanel styles
+ */
+.x-tab-left .x-tab-strip-text img { vertical-align: bottom; margin-right: 2px; }
+.x-tab-strip-active .x-tab-left .x-tab-strip-inner span.x-tab-strip-text { font-weight: normal; color: #333; }
+
+/**
+ * Formpanel styles
+ */
+.admin-form-information { color: #555; font-size: 11px; }
+
+/**
+ * Button styles
+ */
+.admin-button-invalid button { color: red; font-weight: bold; }
+
+/**
+ * Search field
+ */
+.x-form-field-wrap .x-form-trigger.admin-search-field { background: url(../../images/icons/magnifier.png) 0 0 no-repeat; }
+.x-form-field-wrap .x-form-trigger-over.admin-search-field { background: url(../../images/icons/minus-button.png) 0 0 no-repeat; }
