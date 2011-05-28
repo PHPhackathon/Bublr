@@ -88,7 +88,8 @@ class TwitterBubls extends Controller
 			unset($keywords);
 			
 			$bubl['updated'] = date( 'Y-m-d H:i' );
-			$this->save( $bubl );
+			unset($bubl['last_tweet_id']);
+			model('BublModel')->save( $bubl );
 		}
 		unset($bubl);		
 	}
@@ -101,10 +102,14 @@ class TwitterBubls extends Controller
 	 */
 	protected function fetchTweets($bubl){
 
+		// Take first 3 words from title.
+		$titleParts = explode(' ', $bubl['title']);
+		$searchTitle =  implode(' ', array_slice($titleParts, 0, 3));
+		
 		// Build URL
 		$url = sprintf(
 			'http://search.twitter.com/search.json?result=recent&q=%1$s&rpp=100&since_id=%2$s&lang=%3$s',
-			urlencode($bubl['title']),
+			urlencode($searchTitle),
 			$bubl['last_tweet_id'],
 			'en'
 		);
