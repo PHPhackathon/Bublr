@@ -176,9 +176,14 @@ header #toggle-instructions:active { background-position: 0 -78px; }
 /**
  * Product modal
  */
-.product-detail { position: absolute; background: #f2efda url(../../images/front/buddy-product-detail.png) no-repeat 20px 20px; border-radius: 10px; width: 960px; top: 62px; left: 50%; margin: 0 0 0 -480px; z-index: 1000; padding: 20px 0 0 0; display: none; }
-.product-container { margin: 0 0 0 110px; background: #fff; }
-
+.product-detail { position: absolute; background: #f2efda url(../../images/front/buddy-product-detail.png) no-repeat 20px 20px; border-radius: 10px; width: 960px; top: 62px; left: 50%; margin: 0 0 0 -480px; z-index: 1000; padding: 20px 0 0 0; display: none; overflow: hidden; }
+.product-container { margin: 0 0 0 110px; background: #fff; width: 850px; overflow: hidden; border-bottom-right-radius: 10px 10px; border-top-left-radius: 10px 10px; }
+.product-data { padding: 20px; width: 220px; float: left; }
+.product-data h1 { font-size: 12px; font-weight: normal; }
+.product-data img { margin: 16px 0; }
+.twitter-feed { width: 550px; float: left; padding: 20px 0 0 0; }
+.twitter-stats strong { font-weight: normal; color: #12ba00; margin: 0 14px 0 0; }
+#close-product-detail { position: absolute; top: 1px; right: 10px; font-size: 14px; text-decoration: none; }
 
 /* form styles */
 .selector { background: url(../../images/front/uniform_select_background.png) no-repeat 0 0; width: 268px; height: 27px; line-height: 27px; position: relative; padding: 0 0 0 10px; }
