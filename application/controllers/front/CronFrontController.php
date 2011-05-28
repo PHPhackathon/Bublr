@@ -8,6 +8,7 @@ class CronFrontController extends FrontController {
 	public function __construct(){
 	
 		// Validate authentication key
+		// Key: crublr456
 		if(Input::get('key') != ApplicationConfig::$cronjobKey){
 			die('-- wrong or missing key --');
 		}
@@ -64,6 +65,8 @@ class CronFrontController extends FrontController {
 		$ids = model('BublModel')->frontGetOudatedBublIds();
 		
 		library('TwitterBubls')->processBubls( $ids );
+		
+		model( 'BublModel' )->frontMarkUpdated( $ids );
 	}
 }
 

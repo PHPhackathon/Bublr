@@ -35,6 +35,7 @@
 				WHERE
 					last_import IN ( SELECT MIN( last_import ) FROM themes_sources )
 					OR last_import IS NULL
+				ORDER BY last_import
 				LIMIT 1
 			';
 			

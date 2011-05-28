@@ -109,7 +109,15 @@ class BublModel extends Model {
 					AND
 						bk.buble_id = b.id
 					GROUP BY bk.buble_id
-				) AS score
+				) AS score,
+				(	SELECT
+						SUM(bk.matches ) AS tweet_count
+					FROM
+						bubls_keywords bk
+					WHERE
+						bk.buble_id = b.id
+					GROUP BY bk.buble_id
+				) AS tweet_count
 				
 			FROM bubls b
 			
@@ -121,6 +129,12 @@ class BublModel extends Model {
 		
 	}
 	
+	/**
+	 * Return the ids of outdated bubls.
+	 * 
+	 * @param int $limit
+	 * @return array
+	 */
 	public function frontGetOudatedBublIds( $limit=50 ){
 		
 		$query = "
@@ -131,7 +145,7 @@ class BublModel extends Model {
 			WHERE
 				updated IS NULL
 			OR
-				updated > ( SELECT MIN( updated ) AS updated FROM bubls )
+				updated > ( SELECT MIN( updated ) + INTERVAL 1 MONTH AS updated FROM bubls )
 			
 			LIMIT {$limit}
 		";
@@ -142,6 +156,20 @@ class BublModel extends Model {
 			$ids[] = $result['id'];
 			
 		return $ids;
+	}
+	
+	/**
+	 * Mark the supplied ids as updated.
+	 */
+	public function frontMarkUpdated( $ids ){
+		
+		foreach( $ids as $id ){
+			$this->save(array(
+				'id' => $id,
+				'updated' => date( 'Y-m-d H:i' )
+			));
+		}
+		
 	}
 
 }

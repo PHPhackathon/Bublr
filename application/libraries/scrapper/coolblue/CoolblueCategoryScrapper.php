@@ -45,8 +45,12 @@
 			
 			preg_match( $pattern, $page, $match );
 			
+			vardump( $this->_url );
+			vardump( $match );
+
 			// The amount of products is gonna sit on position 1
-			$page = file_get_contents( $this->_url . '?items=' . $match[1] );
+			$url = $this->_url . ( isset( $match[1] ) ? '?items=' . $match[1] : '' );
+			$page = file_get_contents( $url );
 			
 			$pattern = '#<a class="name fn url" href="(.+)"#U';
 			
@@ -73,8 +77,6 @@
 			$url = $url['scheme'] . '://' . $url['host'] . ( isset( $url['port'] ) ? ':' . $url['port'] : '' );
 			
 			$page = file_get_contents( $url . $product_url );
-
-			
 			
 			preg_match( self::$_patterns['title'], $page, $title );
 			$title = isset( $title[1] ) ? $title[1] : '';
