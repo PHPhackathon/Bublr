@@ -14,11 +14,11 @@ class ApplicationConfig
 	// Informational settings
 	public static $domain					= 'localhost';
 	public static $subdomain				= null;
-	public static $siteUrl					= 'http://localhost:8080/';
-	public static $assets1Url				= 'http://localhost:8080/';
-	public static $assets2Url				= 'http://localhost:8080/';
-	public static $assets3Url				= 'http://localhost:8080/';
-	public static $adminUrl					= 'http://localhost:8080/admin/';
+	public static $siteUrl					= 'http://localhost:8888/';
+	public static $assets1Url				= 'http://localhost:8888/';
+	public static $assets2Url				= 'http://localhost:8888/';
+	public static $assets3Url				= 'http://localhost:8888/';
+	public static $adminUrl					= 'http://localhost:8888/admin/';
 
 	// SEO and meta data
 	public static $siteName					= 'Bublr';
