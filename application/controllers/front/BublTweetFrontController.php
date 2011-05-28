@@ -1,6 +1,6 @@
 <?php
 
-	class BublFrontController extends FrontController {
+	class BublTweetFrontController extends FrontController {
 
 		public function __construct(){
 			header( 'Content-Type: application/json');

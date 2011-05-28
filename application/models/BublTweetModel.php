@@ -12,7 +12,6 @@ class BublTweetModel extends Model {
 	 * @return array
 	 */
 	public function frontGetTweetsForBubl( $id, $limit = 999 ){
-		
 		$query = "
 			SELECT
 				id, bubl_id, tweet_id, text, to_user_id, from_user_id, from_user, profile_image_url, date

@@ -81,7 +81,7 @@ input:invalid, textarea:invalid { border-radius: 1px;  -moz-box-shadow: 0px 0px 
 .no-boxshadow textarea:invalid { background-color: #f0dddd; }
 
 ::-moz-selection{ background: #ff0000; color:#fff; text-shadow: none; }
-::selection { background:#ff0000; color:#fff; text-shadow: none; } 
+::selection { background:#F2EFDA; color:#000; text-shadow: none; } 
 a:link { -webkit-tap-highlight-color: #ff0000; } 
 
 button {  width: auto; overflow: visible; }
@@ -111,11 +111,12 @@ header #toggle-instructions:hover { background-position: 0 -39px; }
 header #toggle-instructions:active { background-position: 0 -78px; }
 
 /* Current selection */
-.current-selection { width: 600px; float: right; margin: 15px 75px 0 0; }
+.current-selection { width: 700px; float: right; margin: 15px 75px 0 0; }
 .current-selection dl { float: left; }
 .current-selection dt { float: left; }
 .current-selection dd { float: left; margin: 1px 20px 0 12px; }
 .current-selection select { float: right; }
+.current-selection .selector { float: right; }
 
 
 /* Slider */
@@ -158,12 +159,31 @@ header #toggle-instructions:active { background-position: 0 -78px; }
 /**
  * Main selection modal
  */
-.main-selection { position: absolute; background: #f2efda; border-radius: 10px; width: 960px; top: 62px; left: 50%; margin: 0 0 0 -480px; z-index: 1000; }
+.main-selection { position: absolute; background: #f2efda; border-radius: 10px; width: 960px; top: 62px; left: 50%; margin: 0 0 0 -480px; z-index: 1000; padding: 20px 0 0 0; }
+.three-col-layout .col { float: left; width: 280px; margin: 0 20px; }
+.two-col-layout .col { float: left; width: 435px; margin: 40px 20px 20px; }
+
+.col label { display: block; margin: 0 0 12px; color: #595959; }
+.col .heading { display: block; font-weight: bold; }
+
+.selection-explaination { background-color: #ffffff; padding: 20px; border-radius: 15px; }
+.buddy { margin-top: 40px; }
+.buddy-bottom-right { padding-bottom: 73px; background-image: url(../../images/front/buddy-bottom-right.png); background-repeat: no-repeat; background-position: right bottom; }
+.buddy-top-left { padding-top: 70px; background-image: url(../../images/front/buddy-top-left.png); background-repeat: no-repeat; background-position: left top; }
+.buddy-top-right { padding-top: 70px; background-image: url(../../images/front/buddy-top-right.png); background-repeat: no-repeat; background-position: right top; }
 
 
+/**
+ * Product modal
+ */
+.product-detail { position: absolute; background: #f2efda url(../../images/front/buddy-product-detail.png) no-repeat 20px 20px; border-radius: 10px; width: 960px; top: 62px; left: 50%; margin: 0 0 0 -480px; z-index: 1000; padding: 20px 0 0 0; display: none; }
+.product-container { margin: 0 0 0 110px; background: #fff; }
 
 
-
+/* form styles */
+.selector { background: url(../../images/front/uniform_select_background.png) no-repeat 0 0; width: 268px; height: 27px; line-height: 27px; position: relative; padding: 0 0 0 10px; }
+.selector select { width: 276px; padding: 2px 0 0 0; position: absolute; top: 4px; left: 0; }
+button.search { width: 280px; height: 27px; line-height: 27px; border: none; text-indent: -9999px; background: url(../../images/front/search_button.png) no-repeat 0 0; }
 
 @font-face {
     font-family: 'UniversalfruitcakeRegular';
