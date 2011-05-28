@@ -3,9 +3,16 @@ $(document).ready(function(){
 	// Request price range on category select
 	$('#searchpage select[name=category_id]').change(function(){
 		if(!this.value) return;
+		
+		$('#searchpage select[name=price_range]').empty();
+		$('#searchpage select[name=price_range]').append('<option>Even geduld...</option>');
+		$('#tweets').empty();
+		
 		jQuery.getJSON(
 			'/bubls/price_range/' + parseInt(this.value),
 			function(data){
+			
+				// Populate price range
 				$('#searchpage select[name=price_range]').empty();
 				var range;
 				var optionTemplate = '<option value="{0}-{1}">€{2} - €{3}</option>';
@@ -15,6 +22,11 @@ $(document).ready(function(){
 						optionTemplate.format(range[0], range[1], Math.round(range[0]), Math.round(range[1]))
 					);
 				}
+				
+				// Select first range and activate search button
+				$('#searchpage select[name=price_range] option:first').attr('selected', 'selected');
+				$('#searchpage select[name=price_range]').trigger('change')
+				$('#searchbutton').removeClass('disabled');
 			}
 		);
 	});
@@ -32,6 +44,10 @@ $(document).ready(function(){
 			alert('Gelieve een prijsklasse te selecteren');
 			return;
 		}
+		
+		// Set search button to waiting
+		$('#searchbutton').removeClass('disabled');
+		$('#searchbutton').addClass('waiting');
 
 		// Request bubls
 		jQuery.getJSON(
@@ -54,6 +70,10 @@ $(document).ready(function(){
 						optionTemplate.format(bubl.id, bubl.title)
 					);
 				}
+				
+				// Select first range and activate search button
+				$('#resultspage select[name=bubl_id] option:first').attr('selected', 'selected');
+				$('#resultspage select[name=bubl_id]').trigger('change');
 
 				// Show results page
 				$.mobile.changePage($('#resultspage'), 'slideup');
@@ -79,7 +99,7 @@ $(document).ready(function(){
 				$('#indicatie').html(data.average_score + '%').css('left', parseInt(data.average_score || 0) + '%');
 				
 				// Set tweets
-				var tweetTemplate = '<div class="blokje">' +
+				var tweetTemplate = '<div class="blokje" onclick="location=\'http://twitter.com/#!/{1}/status/{3}\'">' +
 										'<img src="{0}"/><div><b>{1}</b><p style="font-size:12px;">{2}</p></div>' + 
 									'</div>';
 				$('#tweets').empty();
@@ -87,7 +107,7 @@ $(document).ready(function(){
 				for(var i=0; i < data.tweets.length; i++){
 					tweet = data.tweets[i];
 					$('#tweets').append(
-						tweetTemplate.format(tweet.profile_image_url, tweet.from_user, tweet.text)
+						tweetTemplate.format(tweet.profile_image_url, tweet.from_user, tweet.text, tweet.tweet_id)
 					);
 				}
 				
@@ -97,6 +117,8 @@ $(document).ready(function(){
 
 	// Return to search page
 	$('#returnbutton').click(function(){
+		$('#searchbutton').removeClass('disabled');
+		$('#searchbutton').removeClass('waiting');
 		$.mobile.changePage($('#searchpage'), 'slideup');
 	});
 
