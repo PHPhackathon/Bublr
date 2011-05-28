@@ -39,6 +39,7 @@ return array(
 	array('/bubls/price_range/:number:', 'BublFrontController', 'priceRange', Url::getSegment(2)),
 	array('/bubls/mobile_list/:number:/:string:', 'BublFrontController', 'mobileList', Url::getSegment(2), Url::getSegment(3)),
 	array('/category/all', 'CategoryFrontController', 'all' ),
+	array('/bubls/tweets/:number:', 'BublTweetFrontController', 'tweets' ),
 	
 	// Mobile
 	array('/mobile', 'MobileFrontController', 'index'),
