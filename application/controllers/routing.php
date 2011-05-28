@@ -28,7 +28,8 @@ return array(
 	// Test
 	array('/test/bubl_tweets', 'TestFrontController', 'bublTweets'),
 	
-	
+	// Calendars
+	array('/themes/coolblue', 'ThemesFrontController', 'coolblue'),
 	
 
 	// Calendars
