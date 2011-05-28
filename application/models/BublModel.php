@@ -134,6 +134,29 @@ class BublModel extends Model {
 	}
 	
 	/**
+	 * Get bubls by category id and price range
+	 *
+	 * @param int $categoryId
+	 * @param double $priceMin
+	 * @param double $priceMax
+	 */
+	public function frontGetPriceRangeInCategory($categoryId, $priceMin, $priceMax){
+		$query = "
+			SELECT b.id, b.title, b.quicklink
+			FROM bubls b
+			WHERE b.theme_id = :theme_id
+			AND b.average_price BETWEEN :price_min AND :price_max
+			ORDER BY b.title
+		";
+		
+		return $this->getAll($query, 
+			array(':theme_id', $categoryId, Database::PARAM_INT),
+			array(':price_min', $priceMin, Database::PARAM_FLOAT),
+			array(':price_max', $priceMax, Database::PARAM_FLOAT)
+		);
+	}
+	
+	/**
 	 * Return the ids of outdated bubls.
 	 * 
 	 * @param int $limit

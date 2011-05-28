@@ -22,6 +22,7 @@
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
 	<script type="text/javascript" src="http://cufon.shoqolate.com/js/cufon-yui.js?v=1.09i"></script>
 	<script type="text/javascript" src="{$__.config.siteUrl}fonts/journal_400.font.js"></script>
+	<script type="text/javascript" src="{$__.config.siteUrl}javascript/mobile/general.js"></script>
 	<script type="text/javascript">
 		Cufon.replace('.vervang');
 		function changePage() {
@@ -57,23 +58,28 @@
 				<img src="{$__.config.siteUrl}images/mobile/bublr.png" alt="Bubler" style="margin-left:50px;" />
 			</div>
 			<div id="formdiv">
-			<p class="vervang">kies een categorie</p>
-				<select data-theme="c">
-					<option value="" style="font-size:14px;">Categorie</option>
-					<option value="" style="font-size:14px;">iPhone</option>
-					<option value="" style="font-size:14px;">Samsung Galaxy S</option>
-					<option value="" style="font-size:14px;">HTC Hero</option>
-					<option value="" style="font-size:14px;">HTC Desire HD</option>
+
+				{* category select *}
+				<p class="vervang">kies een categorie</p>
+				<select name="category_id" data-theme="c">
+					<option value="">Categorie</option>
+					{loop $themes}
+						<option value="{$id}">{$title|escape}</option>
+					{/loop}
 				</select>
+				{* category select *}
+
+				{* price select *}
 				<p class="vervang">en een prijsklasse</p>
-				<select data-theme="c" style="">
+				<select name="price_range" data-theme="c" style="">
 					<option value="">Prijsklasse</option>
-					<option value="">iPhone</option>
-					<option value="">Samsung Galaxy S</option>
-					<option value="">HTC Hero</option>
-					<option value="">HTC Desire HD</option>
 				</select>
-				<img src="{$__.config.siteUrl}images/mobile/search_button.png" alt="SEARCH" style="margin-top:10px;" onclick="changePage();" />
+				{* price select *}
+
+				{* search button *}
+				<img src="{$__.config.siteUrl}images/mobile/search_button.png" alt="SEARCH" style="margin-top:10px;" id="searchbutton" />
+				{* search button *}
+
 			</div>
 		</div>
 	</div>
