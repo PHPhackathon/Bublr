@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="nl">
+<!doctype html>
+<html lang="en">
 <head>
 
 	{* meta data *}
@@ -9,7 +9,7 @@
 	<meta name="description" content="{$metaDescription|strip_tags|truncate:200|default:$config.metaDescription|escape}" />
 	<meta name="author" content="Bytelogic.be" />
 	<meta name="language" content="nl" />
-	<link rel="shortcut icon" href="{$config.siteUrl}images/front/favicon.ico" />
+	<link rel="shortcut icon" href="{$config.siteUrl}images/front/favicon.ico?v2" />
 	{* meta data *}
 
 	{* stylesheets *}
@@ -38,165 +38,181 @@
 </head>
 <body>
 
-	{* container *}
-	<div id="container">
-
-		{* navigation *}
-		<div id="navigation">
-			<ul>
-				<li {if $currentPage == 'home'}class="active"{/if}>
-					<a href="{$config.siteUrl}"><span>Home</span></a>
-				</li>
-				<li {if $currentPage == 'calendars'}class="active"{/if}>
-					<a href="{$config.siteUrl}activiteiten"><span>Activiteiten</span></a>
-				</li>
-				<li {if $currentPage == 'about'}class="active"{/if}>
-					<a href="{$config.siteUrl}over-ons"><span>Wie zijn wij?</span></a>
-				</li>
-				<li {if $currentPage == 'bengels'}class="active"{/if}>
-					<a href="{$config.siteUrl}bengels"><span>(B)engels</span></a>
-				</li>
-				<li {if $currentPage == 'photoalbums'}class="active"{/if}>
-					<a href="{$config.siteUrl}fotos"><span>Foto's</span></a>
-				</li>
-				<li {if $currentPage == 'members'}class="active"{/if}>
-					<a href="{$config.siteUrl}kern"><span>Kern</span></a>
-				</li>
-				<li {if $currentPage == 'links'}class="active"{/if}>
-					<a href="{$config.siteUrl}links"><span>Links</span></a>
-				</li>
-				<li {if $currentPage == 'contact'}class="active"{/if}>
-					<a href="{$config.siteUrl}contact"><span>Contact</span></a>
-				</li>
-			</ul>
-		</div>
-		{* navigation *}
-
-		{* main *}
-		<div id="main">
-
-			{* title *}
-			<div class="title">
-				<span class="header">KAJ<span>Vostert</span></span>
-				{if $pageTitle}<h1>{' - '|implode:$pageTitle}</h1>{/if}
-			</div>
-			{* title *}
-
-			{* content *}
-			{$.capture.content}
-			{* content *}
-
-		</div>
-		{* main *}
-
-		{* sidebar *}
-		<div id="sidebar">
-
-			{* logo *}
-			<div class="logo">
-				<a href="{$config.siteUrl}" title="Terug naar homepage">
-					<img src="{$config.siteUrl}images/front/logo.png" width="279" height="379" alt="KAJ Logo" />
-				</a>
-			</div>
-			{* logo *}
-
-			{* newsletter subscribe *}
-			<form action="{$config.siteUrl}nieuwsbrief" method="post" class="newsletters">
-				<fieldset>
-					<p>Schrijf je in om onze activiteitenkalender ook iedere maand per e-mail te ontvangen!</p>
-					<input type="text" name="name" value="Naam" onfocus="this.value='';" />
-					<input type="text" name="email" value="E-mail" onfocus="this.value='';" />
-					<button type="submit">Verzend</button>
-				</fieldset>
-			</form>
-			{* newsletter subscribe *}
-
-			{* latest calendar *}
-			{if $latestCalendarSidebar}
-				<div class="item">
-					<strong class="title">
-						Activiteiten <em>{$latestCalendarSidebar.month|date_format:"%B"}</em>
-					</strong>
-					<div class="markup">
-						{$latestCalendarSidebar.description}
-					</div>
-					<a class="button right" href="{$__.config.siteUrl}activiteiten">Meer info &raquo;</a>
-				</div>
-			{/if}
-			{* latest calendar *}
-
-			{* latest photoalbum *}
-			{if $latestPhotoalbumSidebar}
-				<div class="item">
-					<strong class="title">
-						{$latestPhotoalbumSidebar.title|escape}
-					</strong>
-					<div class="images">
-						<ul>
-							{loop $latestPhotoalbumSidebar.images}
-								<li>
-									<a href="{$__.config.siteUrl}images/fancybox/photoalbums/{$filename}" class="fancybox" rel="latestphotoalbum" title="{$alt|escape}">
-										<img src="{$__.config.siteUrl}images/thumbnail_sidebar_rotated/photoalbums/{$filename}" width="60" height="60" alt="{$alt|escape}" />
-									</a>
-								</li>
-							{/loop}
-						</ul>
-					</div>
-					<a class="button right clear" href="{$__.config.siteUrl}fotos/{$latestPhotoalbumSidebar.date|date_format:'%Y'}/{$latestPhotoalbumSidebar.quicklink}">Alle foto's &raquo;</a>
-				</div>
-			{/if}
-			{* latest photoalbum *}
-
-			{* random member *}
-			{if $memberSidebar}
-				<div class="item">
-					<strong class="title">
-						Dit is leider <em>{$memberSidebar.firstname|escape}</em>
-					</strong>
-					<div class="member">
-						{if $memberSidebar.image_filename}
-							<a href="{$__.config.siteUrl}images/fancybox/members/{$memberSidebar.image_filename}" class="fancybox" title="{$memberSidebar.firstname|escape} {$memberSidebar.lastname|escape}">
-								<img src="{$__.config.siteUrl}images/thumbnail_sidebar_rotated/members/{$memberSidebar.image_filename}" width="60" height="60" alt="{$memberSidebar.firstname|escape} {$memberSidebar.lastname|escape}" />
-							</a>
-						{else}
-							<img src="{$__.config.siteUrl}images/thumbnail_sidebar_rotated/members/{$memberSidebar.image_filename}" width="60" height="60" alt="" />
-						{/if}
-						<address>
-							{if $memberSidebar.street}{$memberSidebar.street|escape}<br />{/if}
-							{if $memberSidebar.postal_code}{$memberSidebar.postal_code|escape} {$memberSidebar.city|escape}<br />{/if}
-						</address>
-						{if $memberSidebar.about}
-							<p>{$memberSidebar.about|escape}</p>
-						{/if}
-					</div>
-					<a class="button right clear" href="{$__.config.siteUrl}kern">Onze kernleden &raquo;</a>
-				</div>
-			{/if}
-			{* random member *}
-
-			{* our initatives *}
-			<div class="item">
-				<strong class="title">Onze initatieven</strong>
-				<ul class="initiatives">
-					<li><a href="http://www.vospop.be" rel="external">Vospop</a></li>
-					<li><a href="http://www.refresh-lan.be" rel="external">Refresh-lan</a></li>
-					<li><a href="http://www.pinksterfeesten.be" rel="external">Pinksterfeesten</a></li>
-				</ul>
-			</div>
-			{* our initatives *}
-
-		</div>
-		{* sidebar *}
-
-	<div class="container_clear"></div></div>
-	{* container *}
-
-	{* footer *}
-	<div id="footer">
-		<p>&copy; Copyright KAJ Vostert {date('Y')}. <a href="{$config.siteUrl}contact">Contacteer ons</a></p>
-		<img src="{$config.siteUrl}images/front/ik_ben_uniek_small.png" width="115" height="159" alt="Ik ben uniek" />
-	</div>
-	{* footer *}
+    {* modal window *}
+    <section class="main-selection">
+        
+        {* selection form *}
+        <form method="post" action="" class="three-col-layout">
+            <fieldset>
+            
+                {* col one: category *}
+                <div class="col">
+                    <label for="frm_main-selection_category" class="fruitcake">1. Categorie</label>
+                    <select name="category" id="frm_main-selection_category">
+                        <option value="">- Kies uw categorie -</option>
+                    </select>
+                </div>
+                {* col one: category *}
+                
+                {* col two: price *}
+                <div class="col">
+                    <label for="frm_main-selection_price" class="fruitcake">2. Prijs</label>
+                    <select name="price" id="frm_main-selection_price">
+                        <option value="">- Kies binnen prijsbereik -</option>
+                    </select>
+                </div>
+                {* col two: price *}
+                
+                {* col three: submit button *}
+                <div class="col">
+                    <label class="fruitcake">3. Zoek</label>
+                    <button type="submit">Zoeken</button>
+                </div>
+                {* col three: submit button *}
+            
+            </fieldset>
+        </form>
+        {* selection form *}
+        
+        {* instruction boxes *}
+        <div class="three-col-layout instruction-buddies">
+        
+            {* col one: category instruction *}
+            <div class="col markup buddy-bottom-right">
+                <span class="heading">Kies een categorie</span>
+                <p>
+                    Adipisicing elit, sed do eiusmod tempor incididunt ut labore 
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo 
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate 
+                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur 
+                    sint occaecat cupidatat non proident, sunt in culpa qui officia 
+                    deserunt mollit anim id est laborum.
+                </p>
+            </div>
+            {* col one: category instruction *}
+            
+            {* col two: price instruction *}
+            <div class="col markup buddy-top-left">
+                <span class="heading">Kies een categorie</span>
+                <p>
+                    Adipisicing elit, sed do eiusmod tempor incididunt ut labore 
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo 
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate 
+                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur 
+                    sint occaecat cupidatat non proident, sunt in culpa qui officia 
+                    deserunt mollit anim id est laborum.
+                </p>
+            </div>
+            {* col two: price instruction *}
+            
+            {* col three: results instruction *}
+            <div class="col markup buddy-top-right">
+                <span class="heading">Kies een categorie</span>
+                <p>
+                    Adipisicing elit, sed do eiusmod tempor incididunt ut labore 
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo 
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate 
+                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur 
+                    sint occaecat cupidatat non proident, sunt in culpa qui officia 
+                    deserunt mollit anim id est laborum.
+                </p>
+            </div>
+            {* col three: results instruction *}
+        
+        </div>
+        {* instruction boxes *}
+        
+        {* about boxes *}
+        <div class="two-col-layout credits">
+        
+            {* col one: about the application *}
+            <div class="col markup">
+                <span class="heading">Over Bublr</span>
+                <p>
+                    Adipisicing elit, sed do eiusmod tempor incididunt ut labore 
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo 
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate 
+                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur 
+                    sint occaecat cupidatat non proident, sunt in culpa qui officia 
+                    deserunt mollit anim id est laborum.
+                </p>
+            </div>
+            {* col one: about the application *}
+            
+            {* col two: about the team *}
+            <div class="col markup">
+                <span class="heading">Over het Bublr team</span>
+                <p>
+                    Adipisicing elit, sed do eiusmod tempor incididunt ut labore 
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo 
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate 
+                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur 
+                    sint occaecat cupidatat non proident, sunt in culpa qui officia 
+                    deserunt mollit anim id est laborum.
+                </p>
+            </div>
+            {* col two: about the team *}
+        
+        </div>
+        {* about boxes *}
+        
+    </section>
+    {* modal window *}
+    
+    
+    <div style="width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); position: absolute; top: 0; left: 0; z-index: 999;"></div>
+    
+    
+    {* header *}
+    <header>
+        
+        <a href="" class="logo">Bublr</a>
+        
+        {* current selection container, will be populated by JavaScript *}
+        <div class="current-selection">
+        
+            <dl>
+                <dt class="fruitcake">Categorie:</dt>
+                <dd id="current-category">MegaSpiegelreflexcamera's</dd>
+                
+                <dt class="fruitcake">Prijs:</dt>
+                <dd id="current-pricerange">&euro;&nbsp;8.599,-</dd>
+            </dl>
+            
+            <select name="product_id" id="product_id">
+                <option value="">- kies een product -</option>
+            </select>
+            
+        </div>
+        {* current selection container, will be populated by JavaScript *}
+        
+        <a href="" id="toggle-instructions">Nieuwe zoekopdracht</a>
+        
+    </header>
+    {* header *}
+    
+    {* content area *}
+    <section class="content slider-wrapper">
+    
+        {* slider content will be populated by JavaScript *}
+        <div class="slider-content"></div>
+        
+        {* slider rank images *}
+        <div class="rank-bar"></div>
+        <span class="rank-positive"></span>
+        <span class="rank-negative"></span>
+        
+        {* slider controls *}
+        <a href="#" id="slider-prev" class="slider-control control-left">links</a>
+        <a href="#" id="slider-next" class="slider-control control-right">rechts</a>
+    
+    </section>
+    {* content area *}
 
 	{* scripts *}
 	<script type="text/javascript" src="{$config.siteUrl}javascript/libraries/fancybox-1.3.4/jquery.fancybox-1.3.4.pack.js"></script>
