@@ -32,21 +32,6 @@ class FrontController extends Controller
 
 		// Set template path
 		$this->templatePath = APPLICATION_PATH.'views/front/';
-		
-		// Get latest calendar for sidebar
-		$latestCalendar = model('CalendarModel')->frontGetLatestCalendar();
-		$this->assign('latestCalendarSidebar', $latestCalendar);
-		
-		// Get latest photoalbum for sidebar
-		$latestPhotoalbum = model('PhotoalbumModel')->frontGetLatestPhotoalbum();
-		if($latestPhotoalbum){
-			$latestPhotoalbum['images'] = model('ImageModel')->getAllByRelatedTableId('photoalbums', $latestPhotoalbum['id'], 0, 4);
-		}
-		$this->assign('latestPhotoalbumSidebar', $latestPhotoalbum);
-		
-		// Get random member for sidebar
-		$member = model('MemberModel')->frontGetRandom();
-		$this->assign('memberSidebar', $member);		
 	}
 	
 }

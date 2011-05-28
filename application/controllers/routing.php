@@ -24,6 +24,12 @@ return array(
 
 	// Home
 	array('/', 'HomeFrontController', 'index'),
+	
+	// Test
+	array('/test/bubl_tweets', 'TestFrontController', 'bublTweets'),
+	
+	
+	
 
 	// Calendars
 	array('/activiteiten', 'CalendarsFrontController', 'index'),
