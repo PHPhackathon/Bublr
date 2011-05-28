@@ -1,0 +1,90 @@
+body {
+	background-image: url(../../images/mobile/bublr_bg.png);
+}
+
+@font-face {
+	font-family: 'JournalRegular';
+	src: url('../../fonts/journal-webfont.eot');
+	src: url('../../fonts/journal-webfont.eot?#iefix') format('embedded-opentype'),
+	url('../../fonts/journal-webfont.woff') format('woff'),
+	url('../../fonts/journal-webfont.ttf') format('truetype'),
+	url('../../fonts/journal-webfont.svg#JournalRegular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+
+}
+
+.ui-body-b {
+	background:none;
+}
+.centered {
+	width:320px;
+	margin-left:50%;
+	left:-160px;
+	position:absolute;
+	margin-top:10px;
+}
+#formdiv {
+	width:270px;
+	height:280px;
+	padding:20px;
+	padding-left:33px;
+	background-image:url('../../images/mobile/bublr_search_bg.png');
+	font-family: 'JournalRegular';
+	font-size:26px;
+}
+.min-width-480px .ui-select {
+	width:255px;
+	margin-top:0px;
+	font-size:14px;
+}
+#results {
+	background-image: url('../../images/mobile/results_bg.png');
+	width: 280px;
+	height:410px;
+	padding: 20px;
+	padding-top: 15px;
+}
+#results .min-width-480px .ui-select {
+	width: 280px;
+}
+.blokje {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cee2f3', endColorstr='#f4f8fc'); /* voor IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#cee2f3), to(#f4f8fc)); /* voor webkit browsers */
+	background: -moz-linear-gradient(top, #cee2f3, #f4f8fc); /* voor firefox 3.6+ */
+	padding:13px;
+	border-top:1px solid #ffffff;
+	border-bottom:1px solid #7797b0;
+}
+.blokje p {
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+	margin: 0px;
+}
+.blokje div {
+	margin-left:60px;
+}
+#productselect {
+	padding-left:13px;
+	padding-bottom:10px;
+	border-bottom:1px solid #7797b0;
+
+}
+#indicatie {
+	background-image: url(../../images/mobile/indicatie.png);
+	height:13px;
+	width: 24px;
+	padding:12px;
+	color:white;
+	padding-top:13px;
+}
+.vervang {
+	margin:0px;
+	margin-top:10px;
+}
+.vervang option {
+	font-size: 14px;
+}
+#searchbutton {
+	cursor: pointer;
+}

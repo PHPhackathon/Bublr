@@ -36,8 +36,8 @@ class ApplicationConfig
 	public static $minifyJavascript			= false;
 
 	// Security
-	public static $hashSalt					= 'FDMLvc321d34SDf35546--+';
-	public static $cronjobKey				= 'crublr456';
+	public static $hashSalt					= 'Efsdf1231fgdfgdfg';
+	public static $cronjobKey				= 'aaabbbbcccc';
 
 	// Cookies
 	public static $cookieLifetime			= 86400;

@@ -27,46 +27,27 @@ return array(
 	
 	// Test
 	array('/test/bubl_tweets', 'TestFrontController', 'bublTweets'),
+	array('/test/twitter_query', 'TestFrontController', 'twitterQuery'),
 	
 	// Themes / categorie uploader
-	array('/themes/coolblue', 'ThemesFrontController', 'coolblue'),
-	array('/themes/update', 'ThemesFrontController', 'update'),
+	// array('/themes/coolblue', 'ThemesFrontController', 'coolblue'),
+	// array('/themes/update', 'ThemesFrontController', 'update'),
 	
-	array('/products/:number:', 'BublFrontController', 'products', Url::getSegment(1)),
-	array('/products/:number:/:number:', 'BublFrontController', 'products', Url::getSegment(1), Url::getSegment(2)),
+	// Bubls
+	array('/bubls/:number:', 'BublFrontController', 'products', Url::getSegment(1)),
+	array('/bubls/:number:/:number:', 'BublFrontController', 'products', Url::getSegment(1), Url::getSegment(2)),
+	array('/bubls/price_range/:number:', 'BublFrontController', 'priceRange', Url::getSegment(2)),
+	array('/bubls/mobile_list/:number:/:string:', 'BublFrontController', 'mobileList', Url::getSegment(2), Url::getSegment(3)),
 	array('/category/all', 'CategoryFrontController', 'all' ),
+	array('/bubls/tweets/:number:', 'BublTweetFrontController', 'tweets', Url::getSegment(1) ),
 	
-
-	// Calendars
-	array('/activiteiten', 'CalendarsFrontController', 'index'),
-	array('/activiteiten/:number:', 'CalendarsFrontController', 'index', Url::getSegment(1)),
-
-	// About
-	array('/over-ons', 'AboutFrontController', 'index'),
-	array('/over-ons/:string:', 'AboutFrontController', 'article', Url::getSegment(1)),
-
-	// Bengels
-	array('/bengels', 'BengelsFrontController', 'index'),
-	array('/bengels/:string:', 'BengelsFrontController', 'article', Url::getSegment(1)),
-
-	// Photoalbums
-	array('/fotos', 'PhotoalbumsFrontController', 'index'),
-	array('/fotos/:number:', 'PhotoalbumsFrontController', 'index', Url::getSegment(1)),
-	array('/fotos/:number:/:string:', 'PhotoalbumsFrontController', 'photoalbum', Url::getSegment(1), Url::getSegment(2)),
-
-	// Members
-	array('/kern', 'MembersFrontController', 'index'),
-
-	// Links
-	array('/links', 'LinksFrontController', 'index'),
-
-	// Contact
-	array('/contact', 'ContactFrontController', 'index'),
-	array('/contact/succes', 'ContactFrontController', 'success'),
-
-	// Newsletter subscribe
-	array('/nieuwsbrief', 'NewslettersFrontController', 'subscribe'),
-
+	// Mobile
+	array('/mobile', 'MobileFrontController', 'index'),
+	
+	// Cronjobs
+	array('/system/cron/update/tweets', 'CronFrontController', 'updateTweets' ),
+	array('/system/cron/update/themes', 'CronFrontController', 'updateThemes' ),
+	
 	// Articles
 	array('/artikel/:string:', 'ArticlesFrontController', 'article', Url::getSegment(1)),
 

@@ -27,6 +27,7 @@ class BublModel extends Model {
 				ON b.id = bt.bubl_id
 				
 				WHERE b.id IN ({$ids})
+				AND b.deleted = FALSE
 				
 				GROUP BY b.id
 			";
@@ -76,7 +77,7 @@ class BublModel extends Model {
 			'description' => $description,
 			'average_price' => $price,
 			'average_score' => 0,
-			'created' => date( 'd-m-Y H:i'),
+			'created' => date( 'Y-m-d H:i'),
 			'image_url' => $image
 		);
 		
@@ -101,7 +102,7 @@ class BublModel extends Model {
 		$query = "
 			SELECT
 				id, source_id, theme_id, title, quicklink, summary, description, average_price, average_score, logo_url, thumbnail_url, image_url, 
-				( 	SELECT CAST( SUM( CAST( bk.matches AS SIGNED ) * k.score ) AS SIGNED ) AS score
+				( 	SELECT SUM( CAST( bk.matches AS SIGNED ) * k.score ) AS score
 					FROM
 						keywords k, bubls_keywords bk
 					WHERE
@@ -109,15 +110,93 @@ class BublModel extends Model {
 					AND
 						bk.buble_id = b.id
 					GROUP BY bk.buble_id
-				) AS score
+				) AS score,
+				(	SELECT
+						SUM(bk.matches ) AS tweet_count
+					FROM
+						bubls_keywords bk
+					WHERE
+						bk.buble_id = b.id
+					GROUP BY bk.buble_id
+				) AS tweet_count
 				
 			FROM bubls b
 			
-			WHERE theme_id = :category
+			WHERE
+				theme_id = :category
+			AND
+				deleted = FALSE
 		";
 		
 		return $this->getAll( $query,
 			array( ':category', $category, Database::PARAM_INT ) );
+		
+	}
+	
+	/**
+	 * Get bubls by category id and price range
+	 *
+	 * @param int $categoryId
+	 * @param double $priceMin
+	 * @param double $priceMax
+	 */
+	public function frontGetPriceRangeInCategory($categoryId, $priceMin, $priceMax){
+		$query = "
+			SELECT b.id, b.title, b.quicklink
+			FROM bubls b
+			WHERE b.theme_id = :theme_id
+			AND b.average_price BETWEEN :price_min AND :price_max
+			ORDER BY b.title
+		";
+		
+		return $this->getAll($query, 
+			array(':theme_id', $categoryId, Database::PARAM_INT),
+			array(':price_min', $priceMin, Database::PARAM_FLOAT),
+			array(':price_max', $priceMax, Database::PARAM_FLOAT)
+		);
+	}
+	
+	/**
+	 * Return the ids of outdated bubls.
+	 * 
+	 * @param int $limit
+	 * @return array
+	 */
+	public function frontGetOudatedBublIds( $limit=50 ){
+		
+		$query = "
+			SELECT id
+			
+			FROM bubls
+			
+			WHERE
+				( updated IS NULL
+			OR
+				updated > ( SELECT MIN( updated ) + INTERVAL 1 MONTH AS updated FROM bubls ) )
+			AND deleted = FALSE
+			
+			LIMIT {$limit}
+		";
+		
+		$results = $this->getAll( $query );
+		$ids = array();
+		foreach( $results as $result )
+			$ids[] = $result['id'];
+			
+		return $ids;
+	}
+	
+	/**
+	 * Mark the supplied ids as updated.
+	 */
+	public function frontMarkUpdated( $ids ){
+		
+		foreach( $ids as $id ){
+			$this->save(array(
+				'id' => $id,
+				'updated' => date( 'Y-m-d H:i' )
+			));
+		}
 		
 	}
 

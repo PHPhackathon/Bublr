@@ -7,7 +7,7 @@
 		}
 		
 		/**
-		 * Retrieve all categories.
+		 * Retrieve all bubls by category.
 		 * 
 		 * @param int $category
 		 */
@@ -62,6 +62,59 @@
 		
 		private function _parse_entities( $value ){
 			return array_map( 'htmlentities', $value );
+		}
+		
+		/**
+		 * Get price range by category
+		 *
+		 * @param int $categoryId
+		 */
+		public function priceRange($categoryId){
+		
+			// Get price range
+			$range = model('CategoryModel')->frontGetPriceRangeInCategory($categoryId);
+			if( empty( $price_range['max'] ) ){
+				$price_range['max'] = 0;
+			}
+			if( empty( $price_range['min'] ) ){
+				$price_range['min'] = 0;
+			}
+			
+			// Calculate step size
+			$steps = 10;
+			$minimum_step_size = 100;
+			$step_size = ( $range['max'] - $range['min'] ) / $steps;
+			if( $step_size < $minimum_step_size ){
+				$step_size = $minimum_step_size;
+			}
+			
+			// Build price steps
+			$all_steps = array();
+			$prev = $range['min'];
+			while( $prev < $range['max'] ) {
+				$all_steps[] = $prev . ' - ' . ( $prev + $step_size );
+				$prev += $step_size;
+			}
+			$range['steps'] = $all_steps;
+
+			// Output JSON
+			exit(json_encode($range));
+		}
+		
+		/**
+		 * Get bubls for mobile overview by category id and price range
+		 *
+		 * @param int $categoryId
+		 * @param string $priceRange
+		 */
+		public function mobileList($categoryId, $priceRange){
+		
+			// Get bubls
+			list($min, $max) = explode('-', $priceRange);
+			$bubls = model('BublModel')->frontGetOverviewByCategoryAndPriceRange($categoryId, $min, $max);
+
+			// Outpu JSON
+			exit(json_encode($bubls));
 		}
 	
 	

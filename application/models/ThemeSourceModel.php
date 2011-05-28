@@ -33,8 +33,10 @@
 				FROM
 					themes_sources
 				WHERE
-					last_import IN ( SELECT MIN( last_import ) FROM themes_sources )
-					OR last_import IS NULL
+					( last_import IN ( SELECT MIN( last_import ) FROM themes_sources )
+					OR last_import IS NULL )
+					AND deleted = FALSE
+				ORDER BY last_import
 				LIMIT 1
 			';
 			
