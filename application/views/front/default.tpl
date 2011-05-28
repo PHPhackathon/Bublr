@@ -175,9 +175,17 @@
             
                 <h1 class="fruitcake" id="productTitle">Productnaam komt hier</h1>
                 
-                <img src="" alt="" id="productImage" />
+                <img src="{$config.siteUrl}images/front/temp-product.jpg" alt="" id="productImage" />
                 
-                <strong>Beschrijving:</strong>
+                <strong>Beschrijving:</strong><br/>
+                Adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation Adipisicing elit, sed do eiusmod 
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
+                nostrud exercitation Adipisicing elit, sed do eiusmod tempor incididunt ut labore 
+                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+                Adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitationAdipisicing elit, 
+                sed d labore et dolore magna aliqua. 
             
             </div>
             {* product data container *}
@@ -185,7 +193,7 @@
             {* twitter feed *}
             <div class="twitter-feed">
             
-                <span class="twitter-stats">Rating: <strong id="productTwitterRating">Hoog</strong> #Gespreksonderwerp: <strong id="productTwitterRate">Frequent</strong></span>
+                <span class="twitter-stats fruitcake">Rating : <strong id="productTwitterRating">Hoog</strong> #Gespreksonderwerp : <strong id="productTwitterRate">Frequent</strong></span>
             
                 <div class="twitter-timeline" id="twitterTimeline">
                     <ul>
@@ -199,6 +207,8 @@
             {* twitter feed *}
             
         </div>
+        
+        <a id="close-product-detail" href="#" title="sluit venster" class="fruitcake">x</a>
     
     </section>
     {* modal window *}

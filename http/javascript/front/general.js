@@ -86,6 +86,11 @@ $(document).ready(function(){
         $('.product-detail').fadeIn();
     });
     
+    $('#close-product-detail').click(function(){
+        $('.product-detail').fadeOut();
+        $('#fullScreenModal').fadeOut();
+    });
+    
 
 });
 
@@ -113,9 +118,11 @@ var bluePrintBubble = '<div class="bubble-wrap" style="width: {0}; height: {0}; 
  */
 function addBubble( bubl )
 {
-	var buble = new Buble( bubl['score'], bubl['tweet_count'], bubl['score'] >= 0, bubl['title'] );
+    /*
+	var buble = new Bubl( bubl['score'], bubl['tweet_count'], bubl['score'] >= 0, bubl['title'] );
 	buble.appendTo( '.slider-content' );
-    /*$('.slider-content').append(bluePrintBubble.format('10%', '4%', '10%', 'very-positive', 'Een wat langere titel voor dit product'));
+    */
+    $('.slider-content').append(bluePrintBubble.format('10%', '4%', '10%', 'very-positive', 'Een wat langere titel voor dit product'));
     $('.slider-content').append(bluePrintBubble.format('5%', '52%', '15%', 'very-negative', 'Nokia X6'));
     $('.slider-content').append(bluePrintBubble.format('15%', '16%', '33%', 'very-positive', 'iPhone 3GS'));
     $('.slider-content').append(bluePrintBubble.format('20%', '60%', '19%', 'very-negative', 'HP Deskjet 615'));
@@ -123,9 +130,10 @@ function addBubble( bubl )
     $('.slider-content').append(bluePrintBubble.format('7%', '34%', '44%', 'very-positive', 'iPad 2'));
     $('.slider-content').append(bluePrintBubble.format('18%', '68%', '42%', 'very-negative', 'Macintosh'));
     $('.slider-content').append(bluePrintBubble.format('14%', '56%', '63%', 'very-negative', 'Powerball'));
-    */
+    
 }
 
+/**
 function loadBubls( category ){
 	$.ajax('/bubls/' + category, {
 		dataType: 'json',
@@ -140,9 +148,7 @@ function loadBubls( category ){
 	})
 }
 
-/**
- * Represents a buble.
- */
+
 function Bubl( score, size, positive, name ){
 	this.size = size;
 	this.rating = positive ? 'positive' : 'vnegative';
@@ -154,9 +160,7 @@ function Bubl( score, size, positive, name ){
 Bubl.score_max = 0;
 Bubl.score_min = 0;
 
-/**
- * Append the buble to the selector element.
- */
+ 
 Bubl.prototype.appendTo = function( selector ){
 	var bluePrintBubble = '<div class="bubble-wrap" style="width: {0}; height: {0}; position: absolute; top: {1}; left: {2}">' +
 	    '<div class="outer-bubble {3}">' +
@@ -172,7 +176,7 @@ Bubl.prototype.appendTo = function( selector ){
 	var left = this.left;
 	$( selector ).append( bluePrintBubble.format( width, top, left, 'very-' + this.rating, name ) );
 }
-
+*/
 
 
 
