@@ -10,7 +10,7 @@
 		
 		private $_url;
 		
-		public function __construct( $url ){
+		public function __construct( $url=null ){
 			$this->open( $url );
 		}
 		

@@ -54,8 +54,12 @@
 			$matches = $matches[1];
 			
 			$results = array();
+			// TODO: remove
+			$i = 0;
 			foreach( $matches as $value ){
 				$results[] = $this->_parse_product( $value );
+				if( ++$i == 4 )
+					break;
 			}
 			
 			return $results;

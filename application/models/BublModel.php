@@ -4,6 +4,7 @@ class BublModel extends Model {
 
 	protected $table = 'bubls';
 
+	protected $primaryKey = 'id';
 
 	/**
 	 * LIBRARY
@@ -32,6 +33,70 @@ class BublModel extends Model {
 			return $this->getAll($query);
 		}
 		return array();
+	}
+
+	
+	/*
+	 * $p->getName(),
+		$images[0],
+		$p->getUrl(),
+		$p->getRating(),
+		$p->getPrice(),
+		$p->getSummary(),
+		$p->getDescription(),
+		$source['id'],
+		$themeId
+	 */
+	/**
+	 * Add a bubl to the database if it does not yet exist.
+	 * Otherwise update it.
+	 * 
+	 * @param string $name
+	 * @param string $images
+	 * @param string $url
+	 * @param int	 $rating
+	 * @param string $price
+	 * @param string $summary
+	 * @param string $description
+	 * @param int 	 $source_id
+	 * @param int	 $theme_id
+	 */
+	public function frontAddBubl( $name, $image, $url, $rating, $price, $summary, $description, $source_id, $theme_id ){
+		
+		$query = '
+			SELECT id
+			
+			FROM bubls
+			
+			WHERE
+				title = :title
+				AND source_id = :source_id
+				AND theme_id = :theme_id
+		';
+		
+		$result = $this->getAll($query, $name, $source_id, $theme_id );
+		
+		$data = array(
+			'source_id' => $source_id,
+			'theme_id' => $theme_id,
+			'title' => $name,
+			'quicklink' => '',
+			'summary' => $summary,
+			'description' => $description,
+			'average_price' => $price,
+			'average_score' => 0,
+			'created' => date( 'd-m-Y H:i'),
+			'image_url' => $image
+		);
+		
+		if( count( $result ) > 0 ) {
+			$data['id'] = $result[0]['id'];
+			unset( $data['created'] );
+			
+			$this->update($data);
+		} else {
+			$this->insert($data);
+		}
 	}
 
 }

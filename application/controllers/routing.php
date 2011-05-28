@@ -30,6 +30,7 @@ return array(
 	
 	// Calendars
 	array('/themes/coolblue', 'ThemesFrontController', 'coolblue'),
+	array('/themes/update', 'ThemesFrontController', 'update'),
 	
 
 	// Calendars

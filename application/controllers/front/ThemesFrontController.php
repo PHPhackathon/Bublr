@@ -7,22 +7,25 @@
 		 */
 		public function coolblue(){
 			
-			$themes = $this->_get_themes();
+			$themes = $this->_get_coolblue_themes();
 			
 			foreach( $themes[0] as $key => $item ){
 				$theme = $item;
-				$url = $themes[1][ $key ];
+				$url = 'http://' . $themes[1][ $key ];
 				
 				echo $url . ' :: ' . $theme . '<br />';
 				
-				model('ThemeModel')->frontAddThemeSource( $theme, $url, 'coolblue' );
+				model('ThemeSourceModel')->frontAddThemeSource( $theme, $url, 'coolblue' );
 			}
 			
 			$this->setPageTitle( 'Import complete.' );
 			$this->display( 'import/compleet.tpl' );
 		}
 		
-		private function _get_themes(){
+		/**
+		 * Parse coolblue html to useful data.
+		 */
+		private function _get_coolblue_themes(){
 			$urls = '<option value="shopid:361">Autoradiostore.be assortiment</option> 
 						<option value="shopid:324">Babyfoonstore.be assortiment</option> 
 						<option value="shopid:365">Beamercenter.be assortiment</option> 
@@ -67,13 +70,60 @@
 			$pattern = '#">((.+)((store|center|shop)).be) assortiment#mUis';
 			preg_match_all( $pattern, $urls, $matches );
 			
+			// Return name with store/center/shop. e.g Voicerecorder
+			// Return URL: e.g voicerecordershop.be
 			return array(
 				$matches[2],
 				$matches[1]
 			);
 		}
 	
-
+		/**
+		 * Perform an update of the oldest theme.
+		 */
+		public function update(){
+			
+			$source = model('ThemeModel')->frontGetOldestThemeSource();
+			
+			// Request might take some time.
+			set_time_limit( 0 );
+			
+			$coolblue_scraper = library( 'scrapper/coolblue/CoolblueScrapper');
+			$coolblue_scraper->open( $source['url'] );
+			
+			$results = $coolblue_scraper->scrape();
+			
+			var_dump( $results );
+			
+			// TODO: remove
+			// fast cancel
+			$i=0;
+			foreach( $results as $key => $result ){
+				$themeId = model('ThemeModel')->frontGetIdFor( $key, $source['id'] );
+				
+				$products = $result->getResults();
+				
+				foreach( $products as $p ){
+					$images = $p->getImages();
+					model('BublsModel')->frontAddBubl(
+						$p->getName(),
+						$images[0],
+						$p->getUrl(),
+						$p->getRating(),
+						$p->getPrice(),
+						$p->getSummary(),
+						$p->getDescription(),
+						$source['id'],
+						$themeId
+					);
+					// TODO: remove
+					if( ++$i == 15 )
+						return;
+				}
+			}
+			
+			
+		}
 	
 	
 }
