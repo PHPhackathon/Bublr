@@ -89,5 +89,36 @@ class BublModel extends Model {
 			$this->insert($data);
 		}
 	}
+	
+	/**
+	 * Gets the bubls in a specific $category
+	 * 
+	 * @param int $category
+	 * @return array
+	 */
+	public function frontGetBublsInCategoy( $category ){
+		
+		$query = "
+			SELECT
+				id, source_id, theme_id, title, quicklink, summary, description, average_price, average_score, logo_url, thumbnail_url, image_url, 
+				( 	SELECT CAST( SUM( CAST( bk.matches AS SIGNED ) * k.score ) AS SIGNED ) AS score
+					FROM
+						keywords k, bubls_keywords bk
+					WHERE
+						bk.keyword_id = k.id
+					AND
+						bk.buble_id = b.id
+					GROUP BY bk.buble_id
+				) AS score
+				
+			FROM bubls b
+			
+			WHERE theme_id = :category
+		";
+		
+		return $this->getAll( $query,
+			array( ':category', $category, Database::PARAM_INT ) );
+		
+	}
 
 }

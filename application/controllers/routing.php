@@ -28,9 +28,13 @@ return array(
 	// Test
 	array('/test/bubl_tweets', 'TestFrontController', 'bublTweets'),
 	
-	// Calendars
+	// Themes / categorie uploader
 	array('/themes/coolblue', 'ThemesFrontController', 'coolblue'),
 	array('/themes/update', 'ThemesFrontController', 'update'),
+	
+	array('/products/:number:', 'BublFrontController', 'products', Url::getSegment(1)),
+	array('/products/:number:/:number:', 'BublFrontController', 'products', Url::getSegment(1), Url::getSegment(2)),
+	array('/category/all', 'CategoryFrontController', 'all' ),
 	
 
 	// Calendars

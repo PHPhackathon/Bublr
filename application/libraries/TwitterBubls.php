@@ -86,6 +86,8 @@ class TwitterBubls extends Controller
 				));
 			}
 			unset($keywords);
+			
+			model('BublModel')->updateScore();
 		}
 		unset($bubl);		
 	}
@@ -136,7 +138,7 @@ class TwitterBubls extends Controller
 	protected function matchKeywords($tweet){
 		$matchedKeywords = array();
 		foreach($this->keywords as &$keyword){
-			if(stripos($tweet['text'], $keyword['keyword']) !== false){
+			if(strpos($tweet['text'], $keyword['keyword']) !== false){
 				$matchedKeywords[] = $keyword['id'];
 			}
 		}

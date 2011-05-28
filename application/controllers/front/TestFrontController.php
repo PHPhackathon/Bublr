@@ -16,7 +16,7 @@ class TestFrontController extends FrontController {
 	 */
 	public function bublTweets(){
 	
-		library('TwitterBubls')->processBubls(array(1, 2, 3, 4, 5, 6));
+		library('TwitterBubls')->processBubls(array(1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12));
 		
 	}
 
