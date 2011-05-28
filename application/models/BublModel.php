@@ -27,6 +27,7 @@ class BublModel extends Model {
 				ON b.id = bt.bubl_id
 				
 				WHERE b.id IN ({$ids})
+				AND b.deleted = FALSE
 				
 				GROUP BY b.id
 			";
@@ -121,7 +122,10 @@ class BublModel extends Model {
 				
 			FROM bubls b
 			
-			WHERE theme_id = :category
+			WHERE
+				theme_id = :category
+			AND
+				deleted = FALSE
 		";
 		
 		return $this->getAll( $query,
@@ -143,9 +147,10 @@ class BublModel extends Model {
 			FROM bubls
 			
 			WHERE
-				updated IS NULL
+				( updated IS NULL
 			OR
-				updated > ( SELECT MIN( updated ) + INTERVAL 1 MONTH AS updated FROM bubls )
+				updated > ( SELECT MIN( updated ) + INTERVAL 1 MONTH AS updated FROM bubls ) )
+			AND deleted = FALSE
 			
 			LIMIT {$limit}
 		";
