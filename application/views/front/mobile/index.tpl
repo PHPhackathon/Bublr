@@ -25,12 +25,6 @@
 	<script type="text/javascript" src="{$__.config.siteUrl}javascript/mobile/general.js"></script>
 	<script type="text/javascript">
 		Cufon.replace('.vervang');
-		function changePage() {
-			$.mobile.changePage($('#resultspage'), 'slideup');
-		}
-		function changePage2() {
-			$.mobile.changePage($('#searchpage'), 'slideup');
-		}
 	</script>
 	{* scripts *}
 
@@ -88,33 +82,29 @@
 	{* result page *}
 	<div data-role="page" data-theme="b" id="resultspage" >
 		<div class="centered">
-			<img src="{$__.config.siteUrl}images/mobile/arrow.png" alt="UP" style="margin-left:140px;" onclick="changePage2();" />
+			<img src="{$__.config.siteUrl}images/mobile/arrow.png" alt="UP" style="margin-left:140px;" id="returnbutton" />
 			<div id="results">
+
+				{* bubl select *}
 				<div id="productselect">
-					<select data-theme="c" style="padding-left:13px;">
+					<select data-theme="c" name="bubl_id" style="padding-left:13px;">
 						<option value="">Product</option>
-						<option value="">iPhone</option>
-						<option value="">Samsung Galaxy S</option>
-						<option value="">HTC Hero</option>
-						<option value="">HTC Desire HD</option>
 					</select>
 				</div>
+				{* bubl select *}
+
+				{* score *}
 				<div class="blokje">
 					<img src="{$__.config.siteUrl}images/mobile/statusbar.png"/>
 					<div id="indicatie">82%</div>
 				</div>
-				<div class="blokje">
-					<img style="float:left;margin-right:5px;" src="{$__.config.siteUrl}images/mobile/avatar.jpg"/><div><b>dennisjanssen</b><p style="font-size:14px;">Stevig doorwerken op de PHPHackathon! Dit is een lange tweet van meerdere regels.</p></div>
+				{* score *}
+
+				{* tweets *}
+				<div id="tweets">
 				</div>
-				<div class="blokje">
-					<img style="float:left;margin-right:5px;" src="{$__.config.siteUrl}images/mobile/avatar.jpg"/><div><p><b>dennisjanssen</b></p><p style="font-size:14px;">Stevig doorwerken op de PHPHackathon!</p></div>
-				</div>
-				<div class="blokje">
-					<img style="float:left;margin-right:5px;" src="{$__.config.siteUrl}images/mobile/avatar.jpg"/><div><p><b>dennisjanssen</b></p><p style="font-size:14px;">Stevig doorwerken op de PHPHackathon!</p></div>
-				</div>
-				<div class="blokje">
-					<img style="float:left;margin-right:5px;" src="{$__.config.siteUrl}images/mobile/avatar.jpg"/><div><p><b>dennisjanssen</b></p><p style="font-size:14px;">Stevig doorwerken op de PHPHackathon!</p></div>
-				</div>
+				{* tweets *}
+
 			</div>
 		</div>
 	</div>
