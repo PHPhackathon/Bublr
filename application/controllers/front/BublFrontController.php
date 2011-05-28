@@ -73,16 +73,18 @@
 		
 			// Get price range
 			$range = model('CategoryModel')->frontGetPriceRangeInCategory($categoryId);
-			if( empty( $price_range['max'] ) ){
-				$price_range['max'] = 0;
+			if( empty( $range['max'] ) ){
+				$range['max'] = 0;
 			}
-			if( empty( $price_range['min'] ) ){
-				$price_range['min'] = 0;
+			if( empty( $range['min'] ) ){
+				$range['min'] = 0;
 			}
 			
 			// Calculate step size
 			$steps = 10;
 			$minimum_step_size = 100;
+			$range['min'] = floor($range['min'] / $minimum_step_size) * $minimum_step_size;
+			$range['max'] = ceil($range['max'] / $minimum_step_size) * $minimum_step_size;
 			$step_size = ( $range['max'] - $range['min'] ) / $steps;
 			if( $step_size < $minimum_step_size ){
 				$step_size = $minimum_step_size;

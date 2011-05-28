@@ -85,6 +85,7 @@ $(document).ready(function(){
 	// Request details + tweets on bubl select
 	$('#resultspage select[name=bubl_id]').change(function(){
 		if(!this.value) return;
+		$('#tweets').removeClass('empty');
 		jQuery.getJSON(
 			'/bubls/mobile_details/' + parseInt(this.value),
 			function(data){
@@ -99,16 +100,20 @@ $(document).ready(function(){
 				$('#indicatie').html(data.average_score + '%').css('left', parseInt(data.average_score || 0) + '%');
 				
 				// Set tweets
-				var tweetTemplate = '<div class="blokje" onclick="location=\'http://twitter.com/#!/{1}/status/{3}\'">' +
-										'<img src="{0}"/><div><b>{1}</b><p style="font-size:12px;">{2}</p></div>' + 
-									'</div>';
 				$('#tweets').empty();
-				var tweet;
-				for(var i=0; i < data.tweets.length; i++){
-					tweet = data.tweets[i];
-					$('#tweets').append(
-						tweetTemplate.format(tweet.profile_image_url, tweet.from_user, tweet.text, tweet.tweet_id)
-					);
+				if(data.tweets.length > 0){
+					var tweetTemplate = '<div class="blokje" onclick="location=\'http://twitter.com/#!/{1}/status/{3}\'">' +
+											'<img src="{0}"/><div><b>{1}</b><p style="font-size:12px;">{2}</p></div>' + 
+										'</div>';
+					var tweet;
+					for(var i=0; i < data.tweets.length; i++){
+						tweet = data.tweets[i];
+						$('#tweets').append(
+							tweetTemplate.format(tweet.profile_image_url, tweet.from_user, tweet.text, tweet.tweet_id)
+						);
+					}
+				}else{
+					$('#tweets').addClass('empty');
 				}
 				
 			}

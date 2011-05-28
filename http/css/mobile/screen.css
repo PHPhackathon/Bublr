@@ -93,6 +93,14 @@ body {
 }
 
 /* Tweets */
+#tweets {
+	min-height: 270px;
+}
+
+#tweets.empty {
+	background: url(../../images/mobile/tweets_empty.png) center no-repeat;
+}
+
 #tweets .blokje {
 	cursor: pointer;
 }
@@ -112,7 +120,7 @@ body {
 	display: block;
 	width: 254px;
 	height: 58px;
-	margin-top: 10px;
+	margin-top: 20px;
 	background: url(../../images/mobile/search_button.png) 0 0 no-repeat;
 	cursor: pointer;
 }
