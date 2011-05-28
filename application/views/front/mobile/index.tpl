@@ -58,20 +58,22 @@
 				<select name="category_id" data-theme="c">
 					<option value="">Categorie</option>
 					{loop $themes}
-						<option value="{$id}">{$title|escape}</option>
+						<option value="{$id}">{$title|escape} ({$bubl_count})</option>
 					{/loop}
 				</select>
 				{* category select *}
 
 				{* price select *}
 				<p class="vervang">en een prijsklasse</p>
-				<select name="price_range" data-theme="c" style="">
-					<option value="">Prijsklasse</option>
-				</select>
+				<div id="price_range_container">
+					<select name="price_range" data-theme="c" style="">
+						<option value="">Prijsklasse</option>
+					</select>
+				</div>
 				{* price select *}
 
 				{* search button *}
-				<img src="{$__.config.siteUrl}images/mobile/search_button.png" alt="SEARCH" style="margin-top:10px;" id="searchbutton" />
+				<a id="searchbutton" class="disabled">Search</a>
 				{* search button *}
 
 			</div>
@@ -96,7 +98,7 @@
 				{* score *}
 				<div class="blokje">
 					<img src="{$__.config.siteUrl}images/mobile/statusbar.png"/>
-					<div id="indicatie">82%</div>
+					<div id="indicatie">???</div>
 				</div>
 				{* score *}
 

@@ -50,11 +50,25 @@ class ThemeModel extends Model {
 	 */
 	public function frontGetActiveForDropdown(){
 		$query = "
-			SELECT id, title, quicklink 
-			FROM themes
-			WHERE online = 1
-			AND deleted = 0
-			ORDER BY title
+			SELECT 
+				t.id, t.title, t.quicklink,
+				COUNT(b.id) AS bubl_count
+			
+			FROM themes t
+			
+			INNER JOIN bubls b
+			ON t.id = b.theme_id
+			
+			WHERE t.online = 1
+			AND t.deleted = 0
+			AND b.online = 1
+			AND b.deleted = 0
+			
+			GROUP BY t.id
+			
+			HAVING bubl_count > 0
+			
+			ORDER BY t.title
 		";
 		return $this->getAll($query);
 	}
