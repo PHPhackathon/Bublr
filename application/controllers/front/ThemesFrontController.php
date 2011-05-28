@@ -1,5 +1,6 @@
 <?php
 
+	// TODO: deprecated!
 	class ThemesFrontController extends FrontController {
 
 		/**
@@ -117,8 +118,6 @@
 			}
 			
 			model('ThemeSourceModel')->frontMarkUpdated( $source['id'] );
-			
-			
 		}
 	
 	
