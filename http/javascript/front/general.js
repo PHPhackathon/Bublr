@@ -126,7 +126,7 @@ function addBubble( bubl )
     */
 }
 
-function loadBubls(){
+function loadBubls( category ){
 	$.ajax('/bubls/' + category, {
 		dataType: 'json',
 		method: 'GET',
