@@ -93,22 +93,18 @@
 				</div>
 				{* bubl select *}
 
+				{* score *}
 				<div class="blokje">
 					<img src="{$__.config.siteUrl}images/mobile/statusbar.png"/>
 					<div id="indicatie">82%</div>
 				</div>
-				<div class="blokje">
-					<img style="float:left;margin-right:5px;" src="{$__.config.siteUrl}images/mobile/avatar.jpg"/><div><b>dennisjanssen</b><p style="font-size:14px;">Stevig doorwerken op de PHPHackathon! Dit is een lange tweet van meerdere regels.</p></div>
+				{* score *}
+
+				{* tweets *}
+				<div id="tweets">
 				</div>
-				<div class="blokje">
-					<img style="float:left;margin-right:5px;" src="{$__.config.siteUrl}images/mobile/avatar.jpg"/><div><p><b>dennisjanssen</b></p><p style="font-size:14px;">Stevig doorwerken op de PHPHackathon!</p></div>
-				</div>
-				<div class="blokje">
-					<img style="float:left;margin-right:5px;" src="{$__.config.siteUrl}images/mobile/avatar.jpg"/><div><p><b>dennisjanssen</b></p><p style="font-size:14px;">Stevig doorwerken op de PHPHackathon!</p></div>
-				</div>
-				<div class="blokje">
-					<img style="float:left;margin-right:5px;" src="{$__.config.siteUrl}images/mobile/avatar.jpg"/><div><p><b>dennisjanssen</b></p><p style="font-size:14px;">Stevig doorwerken op de PHPHackathon!</p></div>
-				</div>
+				{* tweets *}
+
 			</div>
 		</div>
 	</div>

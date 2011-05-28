@@ -116,6 +116,23 @@
 			// Outpu JSON
 			exit(json_encode($bubls));
 		}
+		
+		/**
+		 * Get bubls details + latest tweets
+		 *
+		 * @param int $id
+		 */
+		public function mobileDetails($id){
+		
+			// Get bubl
+			$bubl = model('BublModel')->get($id);
+			
+			// Get latest tweets
+			$bubl['tweets'] = model('BublTweetModel')->frontGetTweetsForBubl($id, 10);
+
+			// Outpu JSON
+			exit(json_encode($bubl));
+		}
 	
 	
 }

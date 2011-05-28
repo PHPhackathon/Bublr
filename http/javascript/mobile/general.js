@@ -68,7 +68,29 @@ $(document).ready(function(){
 		jQuery.getJSON(
 			'/bubls/mobile_details/' + parseInt(this.value),
 			function(data){
-				console.log(data);
+				
+				// Validate data
+				if(!data){
+					alert('Helaas, er zijn geen details voor dit item');
+					return;
+				}
+				
+				// Set score
+				$('#indicatie').html(data.average_score + '%').css('left', parseInt(data.average_score || 0) + '%');
+				
+				// Set tweets
+				var tweetTemplate = '<div class="blokje">' +
+										'<img src="{0}"/><div><b>{1}</b><p style="font-size:12px;">{2}</p></div>' + 
+									'</div>';
+				$('#tweets').empty();
+				var tweet;
+				for(var i=0; i < data.tweets.length; i++){
+					tweet = data.tweets[i];
+					$('#tweets').append(
+						tweetTemplate.format(tweet.profile_image_url, tweet.from_user, tweet.text)
+					);
+				}
+				
 			}
 		);
 	});
