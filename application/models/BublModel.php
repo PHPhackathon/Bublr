@@ -35,18 +35,6 @@ class BublModel extends Model {
 		return array();
 	}
 
-	
-	/*
-	 * $p->getName(),
-		$images[0],
-		$p->getUrl(),
-		$p->getRating(),
-		$p->getPrice(),
-		$p->getSummary(),
-		$p->getDescription(),
-		$source['id'],
-		$themeId
-	 */
 	/**
 	 * Add a bubl to the database if it does not yet exist.
 	 * Otherwise update it.
@@ -74,7 +62,10 @@ class BublModel extends Model {
 				AND theme_id = :theme_id
 		';
 		
-		$result = $this->getAll($query, $name, $source_id, $theme_id );
+		$result = $this->getAll($query, 
+			array( ':title', $name, Database::PARAM_STR ),
+			array( ':source_id', $source_id, Database::PARAM_INT ),
+			array( ':theme_id', $theme_id, Database::PARAM_INT ) );
 		
 		$data = array(
 			'source_id' => $source_id,

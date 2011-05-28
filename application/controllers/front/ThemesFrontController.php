@@ -83,29 +83,26 @@
 		 */
 		public function update(){
 			
-			$source = model('ThemeModel')->frontGetOldestThemeSource();
+			$source = model('ThemeSourceModel')->frontGetOldestThemeSource();
 			
 			// Request might take some time.
 			set_time_limit( 0 );
 			
-			$coolblue_scraper = library( 'scrapper/coolblue/CoolblueScrapper');
+			//$coolblue_scraper = library( 'scrapper/coolblue/CoolblueScrapper');
+			$coolblue_scraper = library( 'CoolblueScrapperLib' );
 			$coolblue_scraper->open( $source['url'] );
 			
 			$results = $coolblue_scraper->scrape();
 			
-			var_dump( $results );
-			
-			// TODO: remove
-			// fast cancel
-			$i=0;
 			foreach( $results as $key => $result ){
+				
 				$themeId = model('ThemeModel')->frontGetIdFor( $key, $source['id'] );
 				
 				$products = $result->getResults();
 				
 				foreach( $products as $p ){
 					$images = $p->getImages();
-					model('BublsModel')->frontAddBubl(
+					model('BublModel')->frontAddBubl(
 						$p->getName(),
 						$images[0],
 						$p->getUrl(),
@@ -116,11 +113,10 @@
 						$source['id'],
 						$themeId
 					);
-					// TODO: remove
-					if( ++$i == 15 )
-						return;
 				}
 			}
+			
+			model('ThemeSourceModel')->frontMarkUpdated( $source['id'] );
 			
 			
 		}

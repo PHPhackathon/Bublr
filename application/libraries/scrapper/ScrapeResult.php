@@ -78,7 +78,7 @@
 		 *
 		 * Returns the summary of this object.
 		 */
-		public function getSummamry(){
+		public function getSummary(){
 			return $this->_summary;
 		}
 		

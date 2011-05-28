@@ -1,6 +1,6 @@
 <?php
-	require_once( 'scrapper/Scrapper.php' );
-	require_once( 'scrapper/ScrapeResult.php' );
+	require_once( APPLICATION_PATH.'libraries/scrapper/Scrapper.php' );
+	require_once( APPLICATION_PATH.'libraries/scrapper/ScrapeResult.php' );
 
 	class CoolblueCategoryScrapper implements Scrapper {
 		
@@ -54,12 +54,9 @@
 			$matches = $matches[1];
 			
 			$results = array();
-			// TODO: remove
-			$i = 0;
+
 			foreach( $matches as $value ){
 				$results[] = $this->_parse_product( $value );
-				if( ++$i == 4 )
-					break;
 			}
 			
 			return $results;
@@ -75,8 +72,6 @@
 			$url = parse_url( $this->_url );
 			$url = $url['scheme'] . '://' . $url['host'] . ( isset( $url['port'] ) ? ':' . $url['port'] : '' );
 			
-			
-			echo "Scraping " . $url . $product_url . "\n";
 			$page = file_get_contents( $url . $product_url );
 
 			
@@ -98,8 +93,6 @@
 			
 			preg_match( self::$_patterns['description'], $page, $description );
 			$description = isset( $description[1] ) ? trim( $description[1] ) : 0;
-
-			echo $title . "\t::\t" . $image . "\t::\t" . $rating . "\t::\t" . $price . "\t::\t" . $summary . "\t::\t" . $description . "\n\n";
 			
 			return new ScrapeResult( $title, $url . $product_url, $rating, $price, $summary, $description, array( $image ) );
 		}

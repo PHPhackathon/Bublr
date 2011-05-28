@@ -1,7 +1,7 @@
 <?php
-	require_once( 'scrapper/Scrapper.php' );
-	require_once( 'scrapper/ScrapeResult.php' );
-	require_once( 'scrapper/ScrapeTheme.php' );
+	require_once( APPLICATION_PATH.'libraries/scrapper/Scrapper.php' );
+	require_once( APPLICATION_PATH.'libraries/scrapper/ScrapeResult.php' );
+	require_once( APPLICATION_PATH.'libraries/scrapper/ScrapeTheme.php' );
 	require_once( 'CoolblueCategoryScrapper.php' );
 	
 	define( 'COOLBLUE_CATEGORY', '/category/' );
