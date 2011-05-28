@@ -88,7 +88,8 @@ class TwitterBubls extends Controller
 			unset($keywords);
 			
 			$bubl['updated'] = date( 'Y-m-d H:i' );
-			$this->save( $bubl );
+			unset($bubl['last_tweet_id']);
+			model('BublModel')->save( $bubl );
 		}
 		unset($bubl);		
 	}
