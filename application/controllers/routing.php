@@ -33,44 +33,18 @@ return array(
 	// array('/themes/coolblue', 'ThemesFrontController', 'coolblue'),
 	// array('/themes/update', 'ThemesFrontController', 'update'),
 	
+	// Bubls
 	array('/bubls/:number:', 'BublFrontController', 'products', Url::getSegment(1)),
 	array('/bubls/:number:/:number:', 'BublFrontController', 'products', Url::getSegment(1), Url::getSegment(2)),
 	array('/category/all', 'CategoryFrontController', 'all' ),
 	
+	// Mobile
+	array('/mobile', 'MobileFrontController', 'index'),
+	
+	// Cronjobs
 	array('/system/cron/update/tweets', 'CronFrontController', 'updateTweets' ),
 	array('/system/cron/update/themes', 'CronFrontController', 'updateThemes' ),
 	
-
-	// Calendars
-	array('/activiteiten', 'CalendarsFrontController', 'index'),
-	array('/activiteiten/:number:', 'CalendarsFrontController', 'index', Url::getSegment(1)),
-
-	// About
-	array('/over-ons', 'AboutFrontController', 'index'),
-	array('/over-ons/:string:', 'AboutFrontController', 'article', Url::getSegment(1)),
-
-	// Bengels
-	array('/bengels', 'BengelsFrontController', 'index'),
-	array('/bengels/:string:', 'BengelsFrontController', 'article', Url::getSegment(1)),
-
-	// Photoalbums
-	array('/fotos', 'PhotoalbumsFrontController', 'index'),
-	array('/fotos/:number:', 'PhotoalbumsFrontController', 'index', Url::getSegment(1)),
-	array('/fotos/:number:/:string:', 'PhotoalbumsFrontController', 'photoalbum', Url::getSegment(1), Url::getSegment(2)),
-
-	// Members
-	array('/kern', 'MembersFrontController', 'index'),
-
-	// Links
-	array('/links', 'LinksFrontController', 'index'),
-
-	// Contact
-	array('/contact', 'ContactFrontController', 'index'),
-	array('/contact/succes', 'ContactFrontController', 'success'),
-
-	// Newsletter subscribe
-	array('/nieuwsbrief', 'NewslettersFrontController', 'subscribe'),
-
 	// Articles
 	array('/artikel/:string:', 'ArticlesFrontController', 'article', Url::getSegment(1)),
 
