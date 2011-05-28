@@ -12,13 +12,13 @@ class ApplicationConfig
 {
 
 	// Informational settings
-	public static $domain					= 'localhost';
+	public static $domain					= 'bublr.net';
 	public static $subdomain				= null;
-	public static $siteUrl					= 'http://localhost:8888/';
-	public static $assets1Url				= 'http://localhost:8888/';
-	public static $assets2Url				= 'http://localhost:8888/';
-	public static $assets3Url				= 'http://localhost:8888/';
-	public static $adminUrl					= 'http://localhost:8888/admin/';
+	public static $siteUrl					= 'http://bublr.net/';
+	public static $assets1Url				= 'http://bublr.net/';
+	public static $assets2Url				= 'http://bublr.net/';
+	public static $assets3Url				= 'http://bublr.net/';
+	public static $adminUrl					= 'http://bublr.net/admin/';
 
 	// SEO and meta data
 	public static $siteName					= 'Bublr';
