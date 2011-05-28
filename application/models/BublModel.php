@@ -140,7 +140,7 @@ class BublModel extends Model {
 	 * @param double $priceMin
 	 * @param double $priceMax
 	 */
-	public function frontGetPriceRangeInCategory($categoryId, $priceMin, $priceMax){
+	public function frontGetOverviewByCategoryAndPriceRange($categoryId, $priceMin, $priceMax){
 		$query = "
 			SELECT b.id, b.title, b.quicklink
 			FROM bubls b
@@ -151,8 +151,8 @@ class BublModel extends Model {
 		
 		return $this->getAll($query, 
 			array(':theme_id', $categoryId, Database::PARAM_INT),
-			array(':price_min', $priceMin, Database::PARAM_FLOAT),
-			array(':price_max', $priceMax, Database::PARAM_FLOAT)
+			array(':price_min', $priceMin, Database::PARAM_INT), // sorry
+			array(':price_max', $priceMax, Database::PARAM_INT) // sorry
 		);
 	}
 	

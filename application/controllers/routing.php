@@ -38,6 +38,7 @@ return array(
 	array('/bubls/:number:/:number:', 'BublFrontController', 'products', Url::getSegment(1), Url::getSegment(2)),
 	array('/bubls/price_range/:number:', 'BublFrontController', 'priceRange', Url::getSegment(2)),
 	array('/bubls/mobile_list/:number:/:string:', 'BublFrontController', 'mobileList', Url::getSegment(2), Url::getSegment(3)),
+	array('/bubls/mobile_details/:number:', 'BublFrontController', 'mobileDetails', Url::getSegment(2)),
 	array('/category/all', 'CategoryFrontController', 'all' ),
 	
 	// Mobile

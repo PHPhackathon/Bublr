@@ -18,10 +18,10 @@ $(document).ready(function(){
 			}
 		);
 	});
-	
-	// Request products on search
+
+	// Request bubls on search
 	$('#searchbutton').click(function(){
-		
+
 		// Validate selection
 		var categoryId = $('#searchpage select[name=category_id]').get(0).value;
 		var priceRange = $('#searchpage select[name=price_range]').get(0).value;
@@ -32,15 +32,50 @@ $(document).ready(function(){
 			alert('Gelieve een prijsklasse te selecteren');
 			return;
 		}
-		
-		// Request products
+
+		// Request bubls
 		jQuery.getJSON(
 			'/bubls/mobile_list/' + parseInt(categoryId) + '/' + priceRange,
 			function(data){
+
+				// Validate data
+				if(!data){
+					alert('Helaas, er zijn geen resultaten');
+					return;
+				}
+
+				// Fill list with bubls
+				$('#results select[name=bubl_id]').empty();
+				var bubl;
+				var optionTemplate = '<option value="{0}">{1}</option>';
+				for(var i=0; i < data.length; i++){
+					bubl = data[i];
+					$('#resultspage select[name=bubl_id]').append(
+						optionTemplate.format(bubl.id, bubl.title)
+					);
+				}
+
+				// Show results page
+				$.mobile.changePage($('#resultspage'), 'slideup');
+			}
+		);
+
+	});
+
+	// Request details + tweets on bubl select
+	$('#resultspage select[name=bubl_id]').change(function(){
+		if(!this.value) return;
+		jQuery.getJSON(
+			'/bubls/mobile_details/' + parseInt(this.value),
+			function(data){
 				console.log(data);
 			}
-		);	
-		
+		);
+	});
+
+	// Return to search page
+	$('#returnbutton').click(function(){
+		$.mobile.changePage($('#searchpage'), 'slideup');
 	});
 
 });
