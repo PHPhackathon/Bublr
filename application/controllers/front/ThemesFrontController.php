@@ -9,14 +9,17 @@
 			
 			$themes = $this->_get_themes();
 			
-			foreach( $themes as $item ){
-				$theme = $item[0];
-				$url = $item[1];
+			foreach( $themes[0] as $key => $item ){
+				$theme = $item;
+				$url = $themes[1][ $key ];
+				
+				echo $url . ' :: ' . $theme . '<br />';
+				
 				model('ThemeModel')->frontAddThemeSource( $theme, $url, 'coolblue' );
 			}
 			
 			$this->setPageTitle( 'Import complete.' );
-			$this->dislay( 'import/compleet.tpl' );
+			$this->display( 'import/compleet.tpl' );
 		}
 		
 		private function _get_themes(){
@@ -61,12 +64,12 @@
 						<option value="shopid:352">Videocamerashop.be assortiment</option> 
 						<option value="shopid:345">Voicerecordershop.be assortiment</option>';
 			
-			$pattern = '#">((.+)(store|center|shop).be) assortiment#mUis';
+			$pattern = '#">((.+)((store|center|shop)).be) assortiment#mUis';
 			preg_match_all( $pattern, $urls, $matches );
 			
 			return array(
-				$matches[1],
-				$matches[3]
+				$matches[2],
+				$matches[1]
 			);
 		}
 	
