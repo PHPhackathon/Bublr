@@ -27,6 +27,7 @@ return array(
 	
 	// Test
 	array('/test/bubl_tweets', 'TestFrontController', 'bublTweets'),
+	array('/test/twitter_query', 'TestFrontController', 'twitterQuery'),
 	
 	// Themes / categorie uploader
 	// array('/themes/coolblue', 'ThemesFrontController', 'coolblue'),
