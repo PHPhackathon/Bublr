@@ -29,12 +29,15 @@ return array(
 	array('/test/bubl_tweets', 'TestFrontController', 'bublTweets'),
 	
 	// Themes / categorie uploader
-	array('/themes/coolblue', 'ThemesFrontController', 'coolblue'),
-	array('/themes/update', 'ThemesFrontController', 'update'),
+	// array('/themes/coolblue', 'ThemesFrontController', 'coolblue'),
+	// array('/themes/update', 'ThemesFrontController', 'update'),
 	
-	array('/products/:number:', 'BublFrontController', 'products', Url::getSegment(1)),
-	array('/products/:number:/:number:', 'BublFrontController', 'products', Url::getSegment(1), Url::getSegment(2)),
+	array('/bubls/:number:', 'BublFrontController', 'products', Url::getSegment(1)),
+	array('/bubls/:number:/:number:', 'BublFrontController', 'products', Url::getSegment(1), Url::getSegment(2)),
 	array('/category/all', 'CategoryFrontController', 'all' ),
+	
+	array('/system/cron/update/tweets', 'CronFrontController', 'updateTweets' ),
+	array('/system/cron/update/themes', 'CronFrontController', 'updateThemes' ),
 	
 
 	// Calendars

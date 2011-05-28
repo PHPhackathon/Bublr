@@ -76,7 +76,7 @@ class BublModel extends Model {
 			'description' => $description,
 			'average_price' => $price,
 			'average_score' => 0,
-			'created' => date( 'd-m-Y H:i'),
+			'created' => date( 'Y-m-d H:i'),
 			'image_url' => $image
 		);
 		
@@ -101,7 +101,7 @@ class BublModel extends Model {
 		$query = "
 			SELECT
 				id, source_id, theme_id, title, quicklink, summary, description, average_price, average_score, logo_url, thumbnail_url, image_url, 
-				( 	SELECT CAST( SUM( CAST( bk.matches AS SIGNED ) * k.score ) AS SIGNED ) AS score
+				( 	SELECT SUM( CAST( bk.matches AS SIGNED ) * k.score ) AS score
 					FROM
 						keywords k, bubls_keywords bk
 					WHERE
@@ -119,6 +119,29 @@ class BublModel extends Model {
 		return $this->getAll( $query,
 			array( ':category', $category, Database::PARAM_INT ) );
 		
+	}
+	
+	public function frontGetOudatedBublIds( $limit=50 ){
+		
+		$query = "
+			SELECT id
+			
+			FROM bubls
+			
+			WHERE
+				updated IS NULL
+			OR
+				updated > ( SELECT MIN( updated ) AS updated FROM bubls )
+			
+			LIMIT {$limit}
+		";
+		
+		$results = $this->getAll( $query );
+		$ids = array();
+		foreach( $results as $result )
+			$ids[] = $result['id'];
+			
+		return $ids;
 	}
 
 }

@@ -87,7 +87,8 @@ class TwitterBubls extends Controller
 			}
 			unset($keywords);
 			
-			model('BublModel')->updateScore();
+			$bubl['updated'] = date( 'Y-m-d H:i' );
+			$this->save( $bubl );
 		}
 		unset($bubl);		
 	}
